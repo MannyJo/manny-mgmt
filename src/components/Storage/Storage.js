@@ -10,7 +10,7 @@ const Storage = () => {
     useEffect(() => {
         document.title = 'Storage';
         getAllStorage(1);
-        console.log('Storage');
+        console.log('Storage Page');
     }, [ sectionCount ])
 
     const getAllStorage = id => {

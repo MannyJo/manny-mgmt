@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import FoodDetail from './FoodDetail';
 
 const Food = () => {
 
@@ -21,7 +22,7 @@ const Food = () => {
             <h1>Food Page</h1>
             <div>
             {
-                foods.map(food => <div key={food.id}>{food.name}</div>)
+                foods.map(food => <FoodDetail key={food.id} food={food} />)
             }
             </div>
         </div>
