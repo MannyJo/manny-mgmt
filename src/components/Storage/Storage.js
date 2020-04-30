@@ -28,10 +28,6 @@ const Storage = () => {
         };
 
         getAllStorage(user.id);
-
-        return () => {
-            setAddCount(0);
-        }
     }, [ addCount, user.id ]);
 
     // Submit the storage information
@@ -77,7 +73,7 @@ const Storage = () => {
                 storages.map(storage => (
                     <div key={storage.id}>
                         <Link to={`/section/${storage.id}`}>
-                            <div>{ storage.name }({ storage.sections.length })</div>
+                            { storage.name }({ storage.sections.length })
                         </Link>
                         <button onClick={() => deleteStorage(storage.id)}>DELETE</button>
                     </div>

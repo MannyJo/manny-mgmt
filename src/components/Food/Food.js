@@ -9,7 +9,7 @@ const Food = () => {
 
     useEffect(() => {
         console.log('section id :', sectionId);
-        axios.get(`http://localhost:8080/api/storage/food/${sectionId}`)
+        axios.get(`http://localhost:8080/api/storage/section/food/${sectionId}`)
         .then(results => {
             setFoods(results.data);
         }).catch(err => {
