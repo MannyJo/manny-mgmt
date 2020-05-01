@@ -8,6 +8,7 @@ const Section = () => {
     const [ sections, setSections ] = useState([]);
     const [ sectionName, setSectionName ] = useState('');
     const [ addCount, setAddCount ] = useState(0);
+    const [ isHidden, setIsHidden ] = useState(true);
 
     useEffect(() => {
         document.title = 'Storage > Section';
@@ -74,6 +75,9 @@ const Section = () => {
             }
             </div>
             <div>
+                <button onClick={() => setIsHidden(!isHidden)}>Open Section Form</button>
+            </div>
+            <div hidden={isHidden}>
                 <hr/>
                 <form onSubmit={clickSubmit}>
                     <label htmlFor="sectionName">Name :&nbsp; 
