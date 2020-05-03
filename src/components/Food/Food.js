@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Add from '@material-ui/icons/Add';
-import FoodDetail from './FoodDetail';
+import FoodItem from './FoodItem';
 import NewFoodForm from './NewFoodForm';
 
 const Food = () => {
@@ -26,7 +26,7 @@ const Food = () => {
 
     return (
         <div>
-            <div>
+            <div className="titleContainer">
                 <div className="newBtnContainer">
                     <button className="newBtn" onClick={() => setIsHidden(!isHidden)}>
                         <Add />
@@ -36,7 +36,14 @@ const Food = () => {
             </div>
             <div>
             {
-                foods.map(food => <FoodDetail key={food.id} food={food} />)
+                foods.map(food => (
+                    <FoodItem 
+                        key={food.id} 
+                        food={food} 
+                        addCount={addCount}
+                        setAddCount={setAddCount}
+                    />
+                ))
             }
             </div>
             <NewFoodForm 

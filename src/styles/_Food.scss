@@ -1,0 +1,50 @@
+.itemOuterContainer {
+    padding: 10px;
+
+    .itemInnerContainer {
+        background-color: rgba($color: #525252, $alpha: 1.0);
+        border-radius: 5px;
+    
+        .itemTitleContainer {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            padding: 15px;
+            background-color: black;
+
+            .itemName {
+                font-size: 20px;
+                text-align: center;
+                text-transform: uppercase;
+            }
+        }
+
+        .itemContentContainer {
+            padding: 10px;
+            display: grid;
+            grid-template-columns: 50% 50%;
+            text-align: center;
+            font-size: 15px;
+
+            .alignLeft {
+                text-align: left;
+            }
+
+            .alignRight {
+                text-align: right;
+            }
+        }
+
+        .itemNoteContainer {
+    
+            .itemNote {
+                padding: 5px 20px 10px 20px;
+                font-size: 13px;
+                text-align: center;
+            }
+        }
+
+        .itemButtonContainer {
+            padding: 5px;
+        }
+    }
+}

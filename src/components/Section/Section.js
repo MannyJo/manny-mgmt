@@ -36,7 +36,7 @@ const Section = () => {
 
     return (
         <div>
-            <div>
+            <div className="titleContainer">
                 <div className="newBtnContainer">
                     <button className="newBtn" onClick={() => setIsHidden(!isHidden)}>
                         <Add />
@@ -48,11 +48,11 @@ const Section = () => {
             {
                 sections.map(section => (
                     <div key={section.id} className="outerContainer">
-                        <div className="plusIcon">
-                            <Add fontSize="small" style={{color: '#fff'}} />
-                        </div>
                         <div className="btnContainer">
                             <button onClick={() => deleteSection(section.id)} className="button delete">DELETE</button>
+                        </div>
+                        <div className="plusIcon">
+                            <Add fontSize="small" style={{color: '#fff'}} />
                         </div>
                         <Link to={`/food/${section.id}`}>
                             <div className="itemName">{section.name}&nbsp;({section.foods.length})</div>

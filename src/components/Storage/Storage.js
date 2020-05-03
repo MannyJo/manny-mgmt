@@ -43,7 +43,7 @@ const Storage = () => {
 
     return (
         <div>
-            <div>
+            <div className="titleContainer">
                 <div className="newBtnContainer">
                     <button className="newBtn" onClick={() => setIsHidden(!isHidden)}>
                         <Add />
@@ -55,11 +55,11 @@ const Storage = () => {
             {
                 storages.map(storage => (
                     <div key={storage.id} className="outerContainer">
-                        <div className="plusIcon">
-                            <Add fontSize="small" style={{color: '#fff'}} />
-                        </div>
                         <div className="btnContainer">
                             <button onClick={() => deleteStorage(storage.id)} className="button delete">DELETE</button>
+                        </div>
+                        <div className="plusIcon">
+                            <Add fontSize="small" style={{color: '#fff'}} />
                         </div>
                         <Link to={`/section/${storage.id}`}>
                             <div className="itemName">{ storage.name }&nbsp;({ storage.sections.length })</div>

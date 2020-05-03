@@ -2,28 +2,57 @@ a {
     text-decoration: none;
 }
 
+button, input {
+    outline: none;
+}
+
 .btnContainer {
     float: right;
     margin-top: -2px;
+
+    &.item {
+        float: none;
+        text-align: center;
+        margin: 10px;
+        margin-top: 0;
+    }
 
     .button {
         border: none;
         border-radius: 5px;
         padding: 5px;
 
+        &.delete {
+            background-color: rgba($color: #f35151, $alpha: 1.0);
+        }
+
         &:hover {
             box-shadow: 0px 0px 5px white;
             color: white;
         }
     }
-
-    .delete {
-        background-color: rgba($color: #f35151, $alpha: 1.0);
-    }
 }
 
-.pageTitle {
-    margin-left: 20px;
+.titleContainer {
+
+    .newBtnContainer {
+        float: right;
+    
+        .newBtn {
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+    
+            margin-top: 2px;
+            margin-right: 15px;
+    
+            background-color: #ffffff;
+        }
+    }
+
+    .pageTitle {
+        margin-left: 20px;
+    }
 }
 
 .outerContainer {
@@ -47,25 +76,6 @@ a {
     }
 }
 
-.newBtnContainer {
-    float: right;
-
-    .newBtn {
-        border: none;
-        border-radius: 5px;
-        padding: 5px;
-
-        margin-top: 2px;
-        margin-right: 15px;
-
-        background-color: #ffffff;
-    }
-}
-
-button, input {
-    outline: none;
-}
-
 .modal {
     position: fixed;
     z-index: 1;
@@ -85,6 +95,8 @@ button, input {
 
         .modalTitleContainer {
             font-size: 20px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
             padding: 15px;
             margin-bottom: 15px;
             background-color: #ffffff;
@@ -127,6 +139,7 @@ button, input {
             }
 
             .modalContentButtonContainer {
+                margin-top: 10px;
                 text-align: right;
 
                 .addButton {
