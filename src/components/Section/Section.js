@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Add from '@material-ui/icons/Add';
 import axios from 'axios';
+
+import NewSectionForm from './NewSectionForm';
 
 const Section = () => {
 
     const storageId = window.location.pathname.split('/').pop();
     const [ sections, setSections ] = useState([]);
-    const [ sectionName, setSectionName ] = useState('');
-    const [ addCount, setAddCount ] = useState(0);
     const [ isHidden, setIsHidden ] = useState(true);
+    const [ addCount, setAddCount ] = useState(0);
 
     useEffect(() => {
         document.title = 'Storage > Section';
@@ -23,76 +25,49 @@ const Section = () => {
         });
     }, [ addCount, storageId ]);
 
-    const clickSubmit = e => {
-        e.preventDefault();
-        console.log(sectionName);
-
-        if(sectionName.length > 0) {
-            const sectionObj = {
-                name: sectionName,
-                storage: {
-                    id: storageId
-                }
-            };
-
-            addNewSection(sectionObj);
-        }
-    }
-
-    const addNewSection = newSection => {
-        axios.post('http://localhost:8080/api/storage/section/add', newSection)
-        .then(() => {
-            setAddCount(addCount+1);
-            setSectionName('');
-        }).catch(err => {
-            console.error('Error with adding new section :', err);
-        });
-    }
-
-    const deleteSection = id => {
-        console.log(id);
-        axios.delete(`http://localhost:8080/api/storage/section/delete/${id}`)
+    const deleteSection = sectionId => {
+        axios.delete(`http://localhost:8080/api/storage/section/delete/${sectionId}`)
         .then(() => {
             setAddCount(addCount-1);
         }).catch(err => {
-            console.error('Error with deleting section :', err);
+            console.error('Error with deleting a section :', err);
         });
     }
 
     return (
         <div>
-            <h1>Section Page</h1>
+            <div>
+                <div className="newBtnContainer">
+                    <button className="newBtn" onClick={() => setIsHidden(!isHidden)}>
+                        <Add />
+                    </button>
+                </div>
+                <h1 className="pageTitle">Section</h1>
+            </div>
             <div>
             {
                 sections.map(section => (
-                    <div key={section.id}>
+                    <div key={section.id} className="outerContainer">
+                        <div className="plusIcon">
+                            <Add fontSize="small" style={{color: '#fff'}} />
+                        </div>
+                        <div className="btnContainer">
+                            <button onClick={() => deleteSection(section.id)} className="button delete">DELETE</button>
+                        </div>
                         <Link to={`/food/${section.id}`}>
-                            {section.name}({section.foods.length})
+                            <div className="itemName">{section.name}&nbsp;({section.foods.length})</div>
                         </Link>
-                        <button onClick={() => deleteSection(section.id)}>DELETE</button>
                     </div>
                 ))
             }
             </div>
-            <div>
-                <button onClick={() => setIsHidden(!isHidden)}>Open Section Form</button>
-            </div>
-            <div hidden={isHidden}>
-                <hr/>
-                <form onSubmit={clickSubmit}>
-                    <label htmlFor="sectionName">Name :&nbsp; 
-                        <input 
-                            type="text" 
-                            name="sectionName" 
-                            id="sectionName" 
-                            placeholder="New Section's Name" 
-                            value={sectionName}
-                            onChange={e => setSectionName(e.target.value)}
-                        />
-                    </label>
-                    <input type="submit" value="ADD" />
-                </form>
-            </div>
+            <NewSectionForm
+                isHidden={isHidden}
+                setIsHidden={setIsHidden}
+                storageId={storageId}
+                addCount={addCount}
+                setAddCount={setAddCount}
+            />
         </div>
     );
 }

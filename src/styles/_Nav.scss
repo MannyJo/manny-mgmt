@@ -1,0 +1,13 @@
+.navigation {
+    position: sticky;
+    top: 0;
+    background-color: lighten($color: #525252, $amount: 20%);
+    line-height: 30px;
+
+    a {
+        color: white;
+        border: 1px solid white;
+        margin: 1px;
+        padding: 2px;
+    }
+}

@@ -1,0 +1,142 @@
+a {
+    text-decoration: none;
+}
+
+.btnContainer {
+    float: right;
+    margin-top: -2px;
+
+    .button {
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+
+        &:hover {
+            box-shadow: 0px 0px 5px white;
+            color: white;
+        }
+    }
+
+    .delete {
+        background-color: rgba($color: #f35151, $alpha: 1.0);
+    }
+}
+
+.pageTitle {
+    margin-left: 20px;
+}
+
+.outerContainer {
+    border-radius: 5px;
+
+    padding: 5px;
+    margin: 5px;
+    margin-bottom: 10px;
+
+    line-height: 30px;
+
+    background-color: rgba($color: #525252, $alpha: 1.0);
+
+    .plusIcon {
+        float: left;
+        margin: 3px 5px 0 5px;
+    }
+
+    .itemName {
+        color: white;
+    }
+}
+
+.newBtnContainer {
+    float: right;
+
+    .newBtn {
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+
+        margin-top: 2px;
+        margin-right: 15px;
+
+        background-color: #ffffff;
+    }
+}
+
+button, input {
+    outline: none;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+
+    .modalContent {
+        background-color: grey;
+        margin: 15% auto;
+        width: 80%;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+
+        .modalTitleContainer {
+            font-size: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #ffffff;
+            color: #000000;
+
+            .modalClose {
+                margin-top: -10px;
+                font-size: 30px;
+                float: right;
+
+                &:hover {
+                    color: grey;
+                }
+            }
+        }
+
+        .modalContentContainer {
+            padding: 15px;
+
+            .modalLabel {
+                margin-left: 3px;
+            }
+
+            .modalInput {
+                width: 100%;
+                border: none;
+                border-radius: 5px;
+                padding: 5px;
+                margin: 5px 0;
+                box-sizing: border-box;
+                outline: none;
+            }
+
+            .modalRadioSet {
+                margin: 5px 0;
+                .modalRadioLabel {
+                    margin-right: 10px;
+                    margin-left: 5px;
+                }
+            }
+
+            .modalContentButtonContainer {
+                text-align: right;
+
+                .addButton {
+                    background-color: #000000;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+}

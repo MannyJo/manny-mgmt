@@ -5,9 +5,9 @@ import {
 
 const Nav = () => {
     return (
-        <nav>
-            <Link to="/">Home</Link>&nbsp;
-            <Link to="/storage">Storage</Link>&nbsp;
+        <nav className="navigation">
+            <Link to="/">Home</Link>
+            <Link to="/storage">Storage</Link>
             <Link to="/mypage">My Page</Link>
         </nav>
     );
