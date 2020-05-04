@@ -22,6 +22,10 @@ button, input {
         border-radius: 5px;
         padding: 5px;
 
+        &.update {
+            background-color: rgba($color: #7ff351, $alpha: 1.0);
+        }
+
         &.delete {
             background-color: rgba($color: #f35151, $alpha: 1.0);
         }

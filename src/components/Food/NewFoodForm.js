@@ -54,6 +54,7 @@ const NewFoodForm = props => {
                         name="foodName"
                         className="modalInput"
                         value={food.name}
+                        placeholder="New Food's Name"
                         onChange={handleChangeFor('name')}
                     />
                     <label className="modalLabel" htmlFor="foodCount">Count</label>

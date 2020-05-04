@@ -32,6 +32,7 @@ const FoodDetail = props => {
                 </div>
                 <div className="itemButtonContainer">
                     <div className="btnContainer item">
+                        <button className="button update" onClick={() => console.log('update clicked')}>UPDATE</button>&nbsp;
                         <button className="button delete" onClick={() => deleteItem(food.id)}>DELETE</button>
                     </div>
                 </div>

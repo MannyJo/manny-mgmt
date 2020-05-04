@@ -2,14 +2,14 @@
     padding: 10px;
 
     .itemInnerContainer {
-        background-color: rgba($color: #525252, $alpha: 1.0);
+        background-color: lighten($color: #525252, $amount: 10%);
         border-radius: 5px;
     
         .itemTitleContainer {
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
             padding: 10px;
-            background-color: lighten($color: #000000, $amount: 10%);
+            background-color: darken($color: #525252, $amount: 5%);
 
             .itemName {
                 font-size: 20px;
