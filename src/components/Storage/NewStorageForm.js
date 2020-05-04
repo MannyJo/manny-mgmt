@@ -65,6 +65,8 @@ const NewStorageForm = props => {
     const setDefault = () => {
         setAddCount(addCount+1);
         setNewName('');
+        setStorageId(0);
+        setIsStorage(true);
         setIsHidden(true);
     }
 
@@ -78,7 +80,7 @@ const NewStorageForm = props => {
                     <div>
                         <span>New </span>
                         <select 
-                            defaultValue={isStorage} 
+                            value={isStorage}
                             onChange={e => setIsStorage(e.target.value === 'true' ? true : false)}
                             className="modalTitleSelect"
                         >
@@ -89,9 +91,12 @@ const NewStorageForm = props => {
                 </div>
                 <form className="modalContentContainer" onSubmit={clickSubmit}>
                     <div className="storageSelectContainer" hidden={isStorage}>
-                        <label htmlFor="storageSelect">Storage : </label>
-                        <select onChange={e => setStorageId(parseInt(e.target.value))} required>
-                            <option>select</option>
+                        <label className="modalLabel" htmlFor="storageSelect">Storage</label>
+                        <select
+                            className="modalInput" 
+                            onChange={e => setStorageId(parseInt(e.target.value))} 
+                        >
+                            <option value={0}>===== SELECT =====</option>
                             {
                                 storages.map(storage => (
                                     <option key={storage.id} value={storage.id}>{storage.name}</option>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Add from '@material-ui/icons/Add';
@@ -11,6 +11,7 @@ const StorageItem = props => {
         addCount,
         setAddCount
     } = props;
+    const [ isSubHidden, setIsSubHidden ] = useState(true);
 
     const deleteSection = sectionId => {
         axios.delete(`http://localhost:8080/api/storage/section/delete/${sectionId}`)
@@ -23,7 +24,7 @@ const StorageItem = props => {
 
     return (
         <div className="outerContainer">
-            <div className="innerContainer">
+            <div className="innerContainer" onClick={() => setIsSubHidden(!isSubHidden)}>
                 <div className="btnContainer">
                     <button onClick={() => deleteStorage(storage.id)} className="button delete">DELETE</button>
                 </div>
@@ -34,7 +35,7 @@ const StorageItem = props => {
                     { storage.name }&nbsp;({ storage.sections.length })
                 </div>
             </div>
-            <div className="subContainer">
+            <div className="subContainer" hidden={isSubHidden}>
             {
                 storage.sections.map(section => (
                     <div key={section.id} className="subItemContainer">

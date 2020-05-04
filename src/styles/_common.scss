@@ -140,6 +140,10 @@ button, input {
                 margin: 5px 0;
                 box-sizing: border-box;
                 outline: none;
+
+                &.select {
+                    background-color: #ffffff;
+                }
             }
 
             .modalRadioSet {

@@ -24,8 +24,6 @@ const FoodDetail = props => {
                 <div className="itemContentContainer">
                     <div className="alignRight">QTY :&nbsp;</div>
                     <div className="alignLeft">{food.count}</div>
-                    <div className="alignRight">Minimum :&nbsp;</div>
-                    <div className="alignLeft">{food.minCount}</div>
                     <div className="alignRight">Date of Purchase :&nbsp;</div>
                     <div className="alignLeft">{formattedDate}</div>
                 </div>
