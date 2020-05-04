@@ -8,8 +8,8 @@
         .itemTitleContainer {
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
-            padding: 15px;
-            background-color: black;
+            padding: 10px;
+            background-color: lighten($color: #000000, $amount: 10%);
 
             .itemName {
                 font-size: 20px;

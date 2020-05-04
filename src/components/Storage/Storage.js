@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Add from '@material-ui/icons/Add';
 import axios from 'axios';
 
+import StorageItem from './StorageItem';
 import NewStorageForm from './NewStorageForm';
 
 const Storage = () => {
@@ -54,17 +54,13 @@ const Storage = () => {
             <div>
             {
                 storages.map(storage => (
-                    <div key={storage.id} className="outerContainer">
-                        <div className="btnContainer">
-                            <button onClick={() => deleteStorage(storage.id)} className="button delete">DELETE</button>
-                        </div>
-                        <div className="plusIcon">
-                            <Add fontSize="small" style={{color: '#fff'}} />
-                        </div>
-                        <Link to={`/section/${storage.id}`}>
-                            <div className="itemName">{ storage.name }&nbsp;({ storage.sections.length })</div>
-                        </Link>
-                    </div>
+                    <StorageItem
+                        key={storage.id}
+                        storage={storage}
+                        deleteStorage={deleteStorage}
+                        addCount={addCount}
+                        setAddCount={setAddCount}
+                    />
                 ))
             }
             </div>
@@ -74,6 +70,7 @@ const Storage = () => {
                 user={user}
                 addCount={addCount}
                 setAddCount={setAddCount}
+                storages={storages}
             />
         </div>
     );

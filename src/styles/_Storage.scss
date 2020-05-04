@@ -1,0 +1,13 @@
+.subContainer {
+    margin-left: 30px;
+
+    .subItemContainer {
+        background-color: lighten($color: #525252, $amount: 10%);
+    
+        border-radius: 5px;
+        padding: 5px;
+        margin-bottom: 5px;
+
+        line-height: 30px;
+    }
+}

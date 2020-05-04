@@ -56,24 +56,28 @@ button, input {
 }
 
 .outerContainer {
-    border-radius: 5px;
 
     padding: 5px;
-    margin: 5px;
-    margin-bottom: 10px;
-
-    line-height: 30px;
-
-    background-color: rgba($color: #525252, $alpha: 1.0);
-
-    .plusIcon {
-        float: left;
-        margin: 3px 5px 0 5px;
+    
+    .innerContainer {
+        border-radius: 5px;
+    
+        padding: 5px;
+        margin-bottom: 5px;
+    
+        line-height: 30px;
+    
+        background-color: rgba($color: #525252, $alpha: 1.0);
     }
-
-    .itemName {
-        color: white;
-    }
+}
+    
+.iconContainer {
+    float: left;
+    margin: 3px 5px 0 5px;
+}
+    
+.itemName {
+    color: white;
 }
 
 .modal {
@@ -101,6 +105,14 @@ button, input {
             margin-bottom: 15px;
             background-color: #ffffff;
             color: #000000;
+
+            .modalTitleSelect {
+                font-size: 20px;
+                outline: none;
+                background-color: #ffffff;
+                border: none;
+                border-bottom: 1px solid black;
+            }
 
             .modalClose {
                 margin-top: -10px;
