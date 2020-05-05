@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import FoodForm from './FoodForm';
 
 const FoodDetail = props => {
-    const food = props.food;
-    const purchaseDate = new Date(food.purchaseDate);
-    const formattedDate = purchaseDate.getMonth().toString().concat('/').concat(purchaseDate.getDate()).concat('/').concat(purchaseDate.getFullYear());
+
+    const {
+        food,
+        addCount,
+        setAddCount,
+        sectionId
+    } = props;
+    const purchaseDate = food.purchaseDate.substr(0, 10).split('-');
+    const formattedDate = purchaseDate[1] + '/' + purchaseDate[2] + '/' + purchaseDate[0];
+    const [ isHidden, setIsHidden ] = useState(true);
 
     const deleteItem = foodId => {
         axios.delete(`http://localhost:8080/api/storage/section/food/delete/${foodId}`)
         .then(() => {
-            props.setAddCount(props.addCount-1);
+            setAddCount(addCount-1);
         }).catch(err => {
             console.error('Error with deleting food :', err);
         });
@@ -32,11 +40,20 @@ const FoodDetail = props => {
                 </div>
                 <div className="itemButtonContainer">
                     <div className="btnContainer item">
-                        <button className="button update" onClick={() => console.log('update clicked')}>UPDATE</button>&nbsp;
+                        <button className="button edit" onClick={() => setIsHidden(false)}>EDIT</button>&nbsp;
                         <button className="button delete" onClick={() => deleteItem(food.id)}>DELETE</button>
                     </div>
                 </div>
             </div>
+            <FoodForm 
+                isHidden={isHidden}
+                setIsHidden={setIsHidden}
+                addCount={addCount}
+                setAddCount={setAddCount}
+                sectionId={sectionId}
+                isUpdate={true}
+                food={food}
+            />
         </div>
     );
 }

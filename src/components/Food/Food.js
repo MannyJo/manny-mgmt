@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Add from '@material-ui/icons/Add';
 import FoodItem from './FoodItem';
-import NewFoodForm from './NewFoodForm';
+import FoodForm from './FoodForm';
 
 const Food = () => {
 
@@ -42,16 +42,18 @@ const Food = () => {
                         food={food} 
                         addCount={addCount}
                         setAddCount={setAddCount}
+                        sectionId={sectionId}
                     />
                 ))
             }
             </div>
-            <NewFoodForm 
+            <FoodForm 
                 isHidden={isHidden}
                 setIsHidden={setIsHidden}
                 addCount={addCount}
                 setAddCount={setAddCount}
                 sectionId={sectionId}
+                isUpdate={false}
             />
         </div>
     );

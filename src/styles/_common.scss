@@ -22,7 +22,7 @@ button, input {
         border-radius: 5px;
         padding: 5px;
 
-        &.update {
+        &.edit {
             background-color: rgba($color: #7ff351, $alpha: 1.0);
         }
 
@@ -165,6 +165,14 @@ button, input {
                 .addButton {
                     background-color: #000000;
                     color: white;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+
+                .updateButton {
+                    background-color: rgba($color: #7ff351, $alpha: 1.0);
+                    color: black;
                     border: none;
                     border-radius: 5px;
                     padding: 5px;

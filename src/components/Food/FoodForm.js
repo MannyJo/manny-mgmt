@@ -1,34 +1,73 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const NewFoodForm = props => {
+const FoodForm = props => {
 
-    const DEFAULT_FOOD = {
-        name: '',
-        count: 0,
-        minCount: 0,
-        isSetAlarm: false,
-        purchaseDate: new Date().toISOString().substr(0, 10),
-        section: { id: props.sectionId }
-    };
+    const {
+        isHidden,
+        setIsHidden,
+        addCount,
+        setAddCount,
+        sectionId,
+        isUpdate,
+        food : targetFood
+    } = props;
+
+    const DEFAULT_FOOD = 
+        isUpdate ? {
+            id: targetFood.id,
+            name: targetFood.name,
+            count: targetFood.count,
+            minCount: targetFood.minCount,
+            isSetAlarm: targetFood.isSetAlarm,
+            purchaseDate: targetFood.purchaseDate.substr(0, 10),
+            section: { id: sectionId }
+        } : 
+        {
+            name: '',
+            count: 0,
+            minCount: 0,
+            isSetAlarm: false,
+            purchaseDate: new Date().toISOString().substr(0, 10),
+            section: { id: sectionId }
+        };
+
     const [ food, setFood ] = useState(DEFAULT_FOOD);
 
     const clickSubmit = e => {
         e.preventDefault();
 
         if(food.name.length > 0) {
-            addNewFood(food);
+            if(isUpdate) {
+                updateFood(food);
+            } else {
+                addNewFood(food);
+            }
         }
+    }
+
+    const updateFood = foodObj => {
+        axios.put('http://localhost:8080/api/storage/section/food/update', foodObj)
+        .then(() => {
+            setDefault();
+        }).catch(err => {
+            console.error('Error with updating food :', err);
+        })
     }
 
     const addNewFood = newFood => {
         axios.post('http://localhost:8080/api/storage/section/food/add', newFood)
         .then(() => {
-            props.setAddCount(props.addCount+1);
-            setFood(DEFAULT_FOOD);
+            setDefault();
         }).catch(err => {
             console.error('Error with adding new food :', err);
         });
+    }
+
+    const setDefault = () => {
+        setAddCount(addCount+1);
+        setFood(DEFAULT_FOOD);
+        setIsHidden(true);
     }
 
     const handleChangeFor = name => e => {
@@ -38,13 +77,18 @@ const NewFoodForm = props => {
         setFood({ ...food, [name]: updatedVal });
     }
 
-    const closeModal = e => e.target.className === 'modal' ? props.setIsHidden(true) : null;
+    const closeModal = e => {
+        if(e.target.className === 'modal' || e.target.className === 'modalClose') {
+            setFood(DEFAULT_FOOD);
+            setIsHidden(true);
+        }
+    };
 
     return (
-        <div className="modal" hidden={props.isHidden} onClick={closeModal}>
+        <div className="modal" hidden={isHidden} onClick={closeModal}>
             <div className="modalContent">
                 <div className="modalTitleContainer">
-                    <span className="modalClose" onClick={() => props.setIsHidden(true)}>&times;</span>
+                    <span className="modalClose" onClick={closeModal}>&times;</span>
                     <div>New Food</div>
                 </div>
                 <form className="modalContentContainer" onSubmit={clickSubmit}>
@@ -99,7 +143,11 @@ const NewFoodForm = props => {
                         onChange={handleChangeFor('purchaseDate')}
                     />
                     <div className="modalContentButtonContainer">
-                        <input className="addButton" type="submit" value="ADD" />
+                        {
+                            isUpdate ?
+                            <input className="updateButton" type="submit" value="UPDATE" />
+                            : <input className="addButton" type="submit" value="ADD" />
+                        }
                     </div>
                 </form>
             </div>
@@ -107,4 +155,4 @@ const NewFoodForm = props => {
     );
 }
 
-export default NewFoodForm;
+export default FoodForm;
