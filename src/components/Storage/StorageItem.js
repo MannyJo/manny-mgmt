@@ -1,35 +1,35 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Add from '@material-ui/icons/Add';
-import Subdirectory from '@material-ui/icons/SubdirectoryArrowRight';
+
+import StorageForm from './StorageForm';
+import Section from '../Section/Section';
+import SectionForm from '../Section/SectionForm';
 
 const StorageItem = props => {
     const {
         storage,
         deleteStorage,
         addCount,
-        setAddCount
+        setAddCount,
+        user
     } = props;
+    const [ isHidden , setIsHidden ] = useState(true);
+    const [ isSectionHidden, setIsSectionHidden ] = useState(true);
     const [ isSubHidden, setIsSubHidden ] = useState(true);
-
-    const deleteSection = sectionId => {
-        axios.delete(`http://localhost:8080/api/storage/section/delete/${sectionId}`)
-        .then(() => {
-            setAddCount(addCount-1);
-        }).catch(err => {
-            console.error('Error with deleting a section :', err);
-        });
-    }
 
     return (
         <div className="outerContainer">
-            <div className="innerContainer" onClick={() => setIsSubHidden(!isSubHidden)}>
+            <div 
+                className="innerContainer" 
+                onClick={e => e.target.tagName === 'svg' || !e.target.className.includes('button') ? setIsSubHidden(!isSubHidden) : null}
+            >
                 <div className="btnContainer">
-                    <button onClick={() => deleteStorage(storage.id)} className="button delete">DELETE</button>
+                    <button className="button add" onClick={() => setIsSectionHidden(false)}>ADD</button>&nbsp;
+                    <button className="button edit" onClick={() => setIsHidden(false)}>EDIT</button>&nbsp;
+                    <button className="button delete" onClick={() => deleteStorage(storage.id)}>DELETE</button>
                 </div>
                 <div className="iconContainer">
-                    <Add fontSize="small" style={{color: '#fff'}} />
+                    <Add onClick={() => setIsSubHidden(!isSubHidden)} fontSize="small" style={{color: '#fff'}} />
                 </div>
                 <div className="itemName">
                     { storage.name }&nbsp;({ storage.sections.length })
@@ -38,19 +38,35 @@ const StorageItem = props => {
             <div className="subContainer" hidden={isSubHidden}>
             {
                 storage.sections.map(section => (
-                    <div key={section.id} className="subItemContainer">
-                        <div className="btnContainer">
-                            <button onClick={() => deleteSection(section.id)} className="button delete">DELETE</button>
-                        </div>
-                        <div className="iconContainer">
-                            <Subdirectory fontSize="small" style={{color: '#fff'}} />
-                        </div>
-                        <Link to={`/food/${section.id}`}>
-                            <div className="itemName">{section.name}&nbsp;({section.foods.length})</div>
-                        </Link>
-                    </div>
+                    <Section
+                        key={section.id}
+                        section={section}
+                        addCount={addCount}
+                        setAddCount={setAddCount}
+                        storageId={storage.id}
+                    />
                 ))
             }
+            </div>
+            <div>
+                <StorageForm 
+                    isHidden={isHidden}
+                    setIsHidden={setIsHidden}
+                    user={user}
+                    addCount={addCount}
+                    setAddCount={setAddCount}
+                    isUpdate={true}
+                    storage={storage}
+                />
+                <SectionForm
+                    isHidden={isSectionHidden}
+                    setIsHidden={setIsSectionHidden}
+                    addCount={addCount}
+                    setAddCount={setAddCount}
+                    isUpdate={false}
+                    // section={section}
+                    storageId={storage.id}
+                />
             </div>
         </div>
     );

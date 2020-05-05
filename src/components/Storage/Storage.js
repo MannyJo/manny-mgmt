@@ -3,7 +3,7 @@ import Add from '@material-ui/icons/Add';
 import axios from 'axios';
 
 import StorageItem from './StorageItem';
-import NewStorageForm from './NewStorageForm';
+import StorageForm from './StorageForm';
 
 const Storage = () => {
 
@@ -60,17 +60,19 @@ const Storage = () => {
                         deleteStorage={deleteStorage}
                         addCount={addCount}
                         setAddCount={setAddCount}
+                        user={user}
                     />
                 ))
             }
             </div>
-            <NewStorageForm 
+            <StorageForm 
                 isHidden={isHidden}
                 setIsHidden={setIsHidden}
                 user={user}
                 addCount={addCount}
                 setAddCount={setAddCount}
                 storages={storages}
+                isUpdate={false}
             />
         </div>
     );
