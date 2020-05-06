@@ -64,7 +64,6 @@ const StorageItem = props => {
                     addCount={addCount}
                     setAddCount={setAddCount}
                     isUpdate={false}
-                    // section={section}
                     storageId={storage.id}
                 />
             </div>

@@ -24,7 +24,7 @@ const Storage = () => {
             .then(results => {
                 setStorages(results.data);
             }).catch(err => {
-                console.log('Error with getting storage :', err);
+                console.error('Error with getting storage :', err);
             });
         };
 
