@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 const StorageForm = props => {
     const {
@@ -9,7 +10,8 @@ const StorageForm = props => {
         addCount,
         setAddCount,
         isUpdate,
-        storage
+        storage,
+        config
     } = props;
 
     const DEFAULT_STORAGE = isUpdate ? {
@@ -39,7 +41,7 @@ const StorageForm = props => {
     }
 
     const updateStorage = storageObj => {
-        axios.put('http://localhost:8080/api/storage/update', storageObj)
+        axios.put('/api/storage/update', storageObj, config)
         .then(() => {
             setDefault();
         }).catch(err => {
@@ -49,7 +51,7 @@ const StorageForm = props => {
 
     // Send new storage to the server
     const addNewStorage = newStorage => {
-        axios.post('http://localhost:8080/api/storage/add', newStorage)
+        axios.post('/api/storage/add', newStorage, config)
         .then(() => {
             setDefault();
         }).catch(err => {
@@ -102,4 +104,8 @@ const StorageForm = props => {
     );
 }
 
-export default StorageForm;
+const mapStateToProps = (state) => ({
+    config: state.axiosConfig,
+})
+
+export default connect(mapStateToProps)(StorageForm);

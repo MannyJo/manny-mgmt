@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Add from '@material-ui/icons/Add';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import StorageItem from './StorageItem';
 import StorageForm from './StorageForm';
 
-const Storage = () => {
+const Storage = props => {
 
-    const user = { id: 1 };
+    const {
+        userInfo: user,
+        config
+    } = props;
     const [ storages, setStorages ] = useState([]);
     const [ isHidden , setIsHidden ] = useState(true);
     const [ addCount, setAddCount ] = useState(0);
@@ -20,7 +24,7 @@ const Storage = () => {
     // Get user's storage items
     useEffect(() => {
         const getAllStorage = userId => {
-            axios.get(`http://localhost:8080/api/storage/${userId}`)
+            axios.get(`/api/storage/${userId}`, config)
             .then(results => {
                 setStorages(results.data);
             }).catch(err => {
@@ -29,11 +33,11 @@ const Storage = () => {
         };
 
         getAllStorage(user.id);
-    }, [ addCount, user.id ]);
+    }, [ addCount, user.id, config ]);
 
     // Delete the clicked item
     const deleteStorage = storageId => {
-        axios.delete(`http://localhost:8080/api/storage/delete/${storageId}`)
+        axios.delete(`/api/storage/delete/${storageId}`, config)
         .then(() => {
             setAddCount(addCount-1);
         }).catch(err => {
@@ -53,7 +57,7 @@ const Storage = () => {
             </div>
             <div>
             {
-                storages.map(storage => (
+                storages.length > 0 && storages.map(storage => (
                     <StorageItem
                         key={storage.id}
                         storage={storage}
@@ -78,4 +82,9 @@ const Storage = () => {
     );
 }
 
-export default Storage;
+const mapStateToProps = (state) => ({
+    userInfo: state.userInfo,
+    config: state.axiosConfig,
+})
+
+export default connect(mapStateToProps)(Storage);

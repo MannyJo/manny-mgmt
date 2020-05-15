@@ -2,7 +2,8 @@ import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom';
 import Home from '../Home/Home';
 import Nav from '../Nav/Nav';
@@ -11,17 +12,19 @@ import Food from '../Food/Food';
 import MyPage from '../MyPage/MyPage';
 import Login from '../Login/Login';
 import Error from '../Error/Error';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 const App = () => {
     return (
         <Router>
             <Nav />
             <Switch>
-                <Route path="/" component={Home} exact />
+                <Redirect exact from="/" to="/home" />
+                <Route path="/home" component={Home} exact />
                 <Route path="/login" component={Login} />
-                <Route path="/storage" component={Storage} />
-                <Route path="/food" component={Food} />
-                <Route path="/mypage" component={MyPage} />
+                <ProtectedRoute path="/storage" component={Storage} />
+                <ProtectedRoute path="/food" component={Food} />
+                <ProtectedRoute path="/mypage" component={MyPage} />
                 <Route component={Error} />
             </Switch>
         </Router>
