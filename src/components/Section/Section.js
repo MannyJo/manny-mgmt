@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import Subdirectory from '@material-ui/icons/SubdirectoryArrowRight';
 
 import SectionForm from './SectionForm';
@@ -11,13 +12,14 @@ const Section = props => {
         section,
         addCount,
         setAddCount,
-        storageId
+        storageId,
+        config
     } = props;
 
     const [ isHidden, setIsHidden ] = useState(true);
 
     const deleteSection = sectionId => {
-        axios.delete(`http://localhost:8080/api/storage/section/delete/${sectionId}`)
+        axios.delete(`/api/storage/section/delete/${sectionId}`, config)
         .then(() => {
             setAddCount(addCount-1);
         }).catch(err => {
@@ -50,4 +52,8 @@ const Section = props => {
     );
 }
 
-export default Section;
+const mapStateToProps = (state) => ({
+    config: state.axiosConfig,
+})
+
+export default connect(mapStateToProps)(Section);

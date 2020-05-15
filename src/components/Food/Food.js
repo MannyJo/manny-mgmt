@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 import Add from '@material-ui/icons/Add';
 import FoodItem from './FoodItem';
 import FoodForm from './FoodForm';
 
-const Food = () => {
+const Food = props => {
 
+    const { config } = props;
     const sectionId = window.location.pathname.split('/').pop();
     const [ foods, setFoods ] = useState([]);
     const [ addCount, setAddCount ] = useState(0);
@@ -16,13 +19,13 @@ const Food = () => {
     }, [ sectionId ]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/storage/section/food/${sectionId}`)
+        axios.get(`/api/storage/section/food/${sectionId}`, config)
         .then(results => {
             setFoods(results.data);
         }).catch(err => {
             console.log('Error with getting foods :', err);
         });
-    }, [ addCount, sectionId ]);
+    }, [ addCount, sectionId, config ]);
 
     return (
         <div>
@@ -43,6 +46,7 @@ const Food = () => {
                         addCount={addCount}
                         setAddCount={setAddCount}
                         sectionId={sectionId}
+                        config={config}
                     />
                 ))
             }
@@ -54,9 +58,14 @@ const Food = () => {
                 setAddCount={setAddCount}
                 sectionId={sectionId}
                 isUpdate={false}
+                config={config}
             />
         </div>
     );
 }
 
-export default Food;
+const mapStateToProps = (state) => ({
+    config: state.axiosConfig,
+})
+
+export default connect(mapStateToProps)(Food);

@@ -1,30 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-const MyPage = () => {
+const MyPage = props => {
 
-    const id = 1;
-    const [ userInfo, setUserInfo ] = useState({});
+    const { 
+        userInfo,
+        config
+    } = props;
+    const [ searchedUser, setSearchedUser ] = useState({});
+    const [ role, setRole ] = useState({});
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/user/${id}`)
+        axios.get(`/api/user/${userInfo.id}`, config)
         .then(results => {
-            console.log(results.data);
-            setUserInfo(results.data);
+            setSearchedUser(results.data);
+            setRole(results.data.role);
         }).catch(err => {
-            console.log('Error with getting user info :', err);
+            console.error('Error with getting user info :', err);
         });
-    }, [ id ]);
+    }, [ userInfo, config ]);
 
     return (
         <div>
             <h1>My Page</h1>
-            <div>{userInfo.id}</div>
-            <div>{userInfo.name}</div>
-            <div>{userInfo.email}</div>
-            <div>{userInfo.createdDate}</div>
+            <div>ID : {searchedUser.id}</div>
+            <div>USERNAME : {searchedUser.username}</div>
+            <div>Date of Creation : {searchedUser.createdDate}</div>
+            <div>ROLE : {role.role}</div>
         </div>
     );
 }
 
-export default MyPage;
+const mapStateToProps = (state) => ({
+    userInfo: state.userInfo,
+    config: state.axiosConfig,
+})
+
+export default connect(mapStateToProps)(MyPage);

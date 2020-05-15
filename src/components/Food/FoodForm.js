@@ -10,7 +10,8 @@ const FoodForm = props => {
         setAddCount,
         sectionId,
         isUpdate,
-        food : targetFood
+        food : targetFood,
+        config
     } = props;
 
     const DEFAULT_FOOD = 
@@ -47,7 +48,7 @@ const FoodForm = props => {
     }
 
     const updateFood = foodObj => {
-        axios.put('http://localhost:8080/api/storage/section/food/update', foodObj)
+        axios.put('/api/storage/section/food/update', foodObj, config)
         .then(() => {
             setDefault();
         }).catch(err => {
@@ -56,7 +57,7 @@ const FoodForm = props => {
     }
 
     const addNewFood = newFood => {
-        axios.post('http://localhost:8080/api/storage/section/food/add', newFood)
+        axios.post('/api/storage/section/food/add', newFood, config)
         .then(() => {
             setDefault();
         }).catch(err => {

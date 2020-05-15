@@ -8,14 +8,15 @@ const FoodDetail = props => {
         food,
         addCount,
         setAddCount,
-        sectionId
+        sectionId,
+        config
     } = props;
     const purchaseDate = food.purchaseDate.substr(0, 10).split('-');
     const formattedDate = purchaseDate[1] + '/' + purchaseDate[2] + '/' + purchaseDate[0];
     const [ isHidden, setIsHidden ] = useState(true);
 
     const deleteItem = foodId => {
-        axios.delete(`http://localhost:8080/api/storage/section/food/delete/${foodId}`)
+        axios.delete(`/api/storage/section/food/delete/${foodId}`, config)
         .then(() => {
             setAddCount(addCount-1);
         }).catch(err => {
@@ -53,6 +54,7 @@ const FoodDetail = props => {
                 sectionId={sectionId}
                 isUpdate={true}
                 food={food}
+                config={config}
             />
         </div>
     );

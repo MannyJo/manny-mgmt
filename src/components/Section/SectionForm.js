@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 const SectionForm = props => {
     const {
@@ -9,7 +10,8 @@ const SectionForm = props => {
         setAddCount,
         isUpdate,
         section,
-        storageId
+        storageId,
+        config
     } = props;
 
     const DEFAULT_SECTION = isUpdate ? {
@@ -29,17 +31,17 @@ const SectionForm = props => {
 
         if(sectionObj.name.length > 0) {
             if(isUpdate) {
-                updateStorage(sectionObj);
+                updateSection(sectionObj);
             } else {
-                addNewStorage(sectionObj);
+                addNewSection(sectionObj);
             }
         } else {
             // new name is empty
         }
     }
 
-    const updateStorage = sectionObj => {
-        axios.put('http://localhost:8080/api/storage/section/update', sectionObj)
+    const updateSection = sectionObj => {
+        axios.put('/api/storage/section/update', sectionObj, config)
         .then(() => {
             setDefault();
         }).catch(err => {
@@ -48,8 +50,8 @@ const SectionForm = props => {
     }
 
     // Send new storage to the server
-    const addNewStorage = newStorage => {
-        axios.post('http://localhost:8080/api/storage/section/add', newStorage)
+    const addNewSection = newStorage => {
+        axios.post('/api/storage/section/add', newStorage, config)
         .then(() => {
             setDefault();
         }).catch(err => {
@@ -102,4 +104,8 @@ const SectionForm = props => {
     );
 }
 
-export default SectionForm;
+const mapStateToProps = (state) => ({
+    config: state.axiosConfig,
+})
+
+export default connect(mapStateToProps)(SectionForm);
