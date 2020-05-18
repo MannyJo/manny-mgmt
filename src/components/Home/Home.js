@@ -2,23 +2,31 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 const Home = props => {
-    const userInfo = props.userInfo;
+    const {
+        userInfo,
+        auth,
+    } = props;
 
     useEffect(() => {
         document.title = 'Home';
-        console.log(userInfo);
     });
 
+    const getUserName = username => username.split('@')[0];
+
     return (
-        <div>
-            <h1>HOME</h1>
-            <h2 hidden={userInfo.id ? false : true}>Hello, {userInfo.username}.</h2>
+        <div className="background">
+            <div className="title">What's In My Storage</div>
+            <div hidden={auth ? false : true}>
+                <div className="homeWelcome">Welcome,</div>
+                <div className="homeName">{getUserName(userInfo.username)}</div>
+            </div>
         </div>
     );
 }
 
 const mapStateToProps = (state) => ({
-    userInfo: state.userInfo
+    userInfo: state.userInfo,
+    auth: state.axiosConfig.headers.Authorization,
 })
 
 export default connect(mapStateToProps)(Home);

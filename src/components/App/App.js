@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -6,18 +6,28 @@ import {
     Redirect
 } from 'react-router-dom';
 import Home from '../Home/Home';
-import Nav from '../Nav/Nav';
 import Storage from '../Storage/Storage';
 import Food from '../Food/Food';
 import MyPage from '../MyPage/MyPage';
 import Login from '../Login/Login';
 import Error from '../Error/Error';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import NavBar from '../Nav/NavBar';
+import NavPage from '../Nav/NavPage';
 
 const App = () => {
+    const [ hidden, setHidden ] = useState(true);
+
     return (
         <Router>
-            <Nav />
+            <NavBar 
+                hidden={hidden}
+                setHidden={setHidden}
+            />
+            <NavPage 
+                hidden={hidden}
+                setHidden={setHidden}
+            />
             <Switch>
                 <Redirect exact from="/" to="/home" />
                 <Route path="/home" component={Home} exact />
