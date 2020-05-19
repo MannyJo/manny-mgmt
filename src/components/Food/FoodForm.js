@@ -90,7 +90,7 @@ const FoodForm = props => {
             <div className="modalContent">
                 <div className="modalTitleContainer">
                     <span className="modalClose" onClick={closeModal}>&times;</span>
-                    <div>New Food</div>
+                    <div>{ isUpdate ? 'Edit' : 'New' } Food</div>
                 </div>
                 <form className="modalContentContainer" onSubmit={clickSubmit}>
                     <label className="modalLabel" htmlFor="foodName">Name</label>

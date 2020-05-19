@@ -78,7 +78,7 @@ const SectionForm = props => {
                 <div className="modalTitleContainer">
                     <span className="modalClose" onClick={closeModal}>&times;</span>
                     <div>
-                        <span>{isUpdate ? 'Edit' : 'New'} Storage</span>
+                        <span>{isUpdate ? 'Edit' : 'New'} Section</span>
                     </div>
                 </div>
                 <form className="modalContentContainer" onSubmit={clickSubmit}>

@@ -1,0 +1,63 @@
+.loginContainer {
+    margin: auto;
+    padding-top: 30px;
+    text-align: center;
+    width: 80%;
+    max-width: 500px;
+
+    .loginFormContainer {
+        background-color: rgba(#252525, 0.7);
+        padding: 10px;
+        border-radius: 5px;
+
+        label {
+            font-size: 20px;
+
+            span {
+                font-size: 15px;
+            }
+        }
+
+        .loginInput {
+            width: 100%;
+
+            box-sizing: border-box;
+            margin: 10px 0;
+            padding: 5px;
+            border: 0;
+            border-radius: 5px;
+        }
+
+        .loginBtnContainer {
+            width: 100%;
+            margin-top: 10px;
+
+            .loginBtn {
+                width: 100%;
+
+                padding: 5px;
+                border-radius: 5px;
+                border: 0;
+
+                background-color: lighten($color: #525252, $amount: 20%);
+
+                color: white;
+                font-size: 15px;
+            }
+        }
+
+    }
+
+    .loginRegisterChange {
+        text-align: right;
+        padding-top: 5px;
+        padding-right: 10px;
+
+        button {
+            background: none;
+            color: skyblue;
+            border: none;
+            font-size: 15px;
+        }
+    }
+}

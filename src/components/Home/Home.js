@@ -15,7 +15,7 @@ const Home = props => {
 
     return (
         <div className="background">
-            <div className="title">What's In My Storage</div>
+            <div className="title">What's In My Storage?</div>
             <div hidden={auth ? false : true}>
                 <div className="homeWelcome">Welcome,</div>
                 <div className="homeName">{getUserName(userInfo.username)}</div>
