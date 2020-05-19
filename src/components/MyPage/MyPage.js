@@ -14,7 +14,10 @@ const MyPage = props => {
     useEffect(() => {
         axios.get(`/api/user/${userInfo.id}`, config)
         .then(results => {
-            setSearchedUser(results.data);
+            setSearchedUser({ 
+                ...results.data, 
+                createdDate: results.data.createdDate.substr(0, 10) 
+            });
             setRole(results.data.role);
         }).catch(err => {
             console.error('Error with getting user info :', err);
@@ -23,11 +26,17 @@ const MyPage = props => {
 
     return (
         <div className="myPageContainer">
-            <h1>My Page</h1>
-            <div>ID : {searchedUser.id}</div>
-            <div>USERNAME : {searchedUser.username}</div>
-            <div>Date of Creation : {searchedUser.createdDate}</div>
-            <div>ROLE : {role.role}</div>
+            <div className="titleContainer">
+                <h1 className="pageTitle">My Page</h1>
+            </div>
+            <div className="myPageContentContainer">
+                <div className="myPageTitle"><strong>Username</strong></div>
+                <div className="myPageContent">{searchedUser.username}</div>
+                <div className="myPageTitle"><strong>Date of Creation</strong></div>
+                <div className="myPageContent">{searchedUser.createdDate}</div>
+                <div className="myPageTitle"><strong>Role</strong></div>
+                <div className="myPageContent">{role.role}</div>
+            </div>
         </div>
     );
 }
