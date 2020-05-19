@@ -28,7 +28,7 @@ const Food = props => {
     }, [ addCount, sectionId, config ]);
 
     return (
-        <div>
+        <div className="foodContainer">
             <div className="titleContainer">
                 <div className="newBtnContainer">
                     <button className="newBtn" onClick={() => setIsHidden(!isHidden)}>

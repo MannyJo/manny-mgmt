@@ -26,12 +26,13 @@
     top: 0;
     left: 0;
 
-    // overflow-x: hidden;
-
     text-align: center;
 
+    overflow-x: hidden;
+    transition: 0.3s;
+
     &.hidden {
-        display: none;
+        width: 0;
     }
 
     .navContent {

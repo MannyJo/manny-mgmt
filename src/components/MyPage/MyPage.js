@@ -22,7 +22,7 @@ const MyPage = props => {
     }, [ userInfo, config ]);
 
     return (
-        <div>
+        <div className="myPageContainer">
             <h1>My Page</h1>
             <div>ID : {searchedUser.id}</div>
             <div>USERNAME : {searchedUser.username}</div>

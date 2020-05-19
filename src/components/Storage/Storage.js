@@ -46,7 +46,7 @@ const Storage = props => {
     }
 
     return (
-        <div>
+        <div className="storageContainer">
             <div className="titleContainer">
                 <div className="newBtnContainer">
                     <button className="newBtn" onClick={() => setIsHidden(!isHidden)}>
