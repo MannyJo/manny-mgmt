@@ -55,7 +55,6 @@ button, input {
     }
 
     .pageTitle {
-        // margin-left: 10%;
         text-align: center;
     }
 }
@@ -172,5 +171,22 @@ button, input {
                 }
             }
         }
+    }
+}
+
+.messageContainer {
+
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+
+    &.error {
+        background-color: rgba($color: red, $alpha: 0.2);
+        border: 1px solid red;
+    }
+
+    &.normal {
+        background-color: rgba($color: blue, $alpha: 0.2);
+        border: 1px solid blue;
     }
 }
