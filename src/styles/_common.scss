@@ -38,6 +38,8 @@ button, input {
 }
 
 .titleContainer {
+    margin: auto;
+    max-width: 500px;
 
     .newBtnContainer {
         float: right;
@@ -62,6 +64,8 @@ button, input {
 .outerContainer {
 
     padding: 5px;
+    margin: auto;
+    max-width: 500px;
     
     .innerContainer {
         border-radius: 5px;
@@ -165,6 +169,14 @@ button, input {
                 .updateButton {
                     background-color: rgba($color: #7ff351, $alpha: 1.0);
                     color: black;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+
+                .deleteButton {
+                    background-color: rgba($color: #f35151, $alpha: 1.0);
+                    color: white;
                     border: none;
                     border-radius: 5px;
                     padding: 5px;

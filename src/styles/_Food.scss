@@ -4,6 +4,8 @@
 
 .itemOuterContainer {
     padding: 10px;
+    margin: auto;
+    max-width: 500px;
 
     .itemInnerContainer {
         background-color: lighten($color: #525252, $amount: 10%);

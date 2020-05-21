@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const MyPageForm = props => {
 
     const {
+        type,
         config,
         userInfo,
         hidden,
@@ -19,6 +21,7 @@ const MyPageForm = props => {
     const [ isChecked, setIsChecked ] = useState(false);
     const [ message, setMessage ] = useState('');
     const [ isUpdateSuccess, setUpdateSuccess ] = useState(false);
+    let history = useHistory();
 
     const closeModal = e => {
         if(e.target.className === 'modal' || e.target.className === 'modalClose') {
@@ -33,7 +36,7 @@ const MyPageForm = props => {
         });
     }
 
-    const clickSubmit = e => {
+    const clickUpdateSubmit = e => {
         e.preventDefault();
 
         if(updateUser.password && updateUser.newPassword) {
@@ -53,47 +56,76 @@ const MyPageForm = props => {
         }
     }
 
+    const clickDeleteSubmit = e => {
+        e.preventDefault();
+        
+        axios.delete(`/api/user/delete/${userInfo.id}`, config)
+        .then(results => {
+            console.log(results.data);
+            logout();
+            history.push('/home');
+        }).catch(err => {
+            console.error('Error with deleting user :', err.response.data.message);
+        });
+    }
+
+    const logout = () => {
+        props.dispatch({ type: 'UNSET_USERINFO' });
+        props.dispatch({ type: 'LOGOUT' });
+    }
+
     return (
         <div className="modal" hidden={hidden} onClick={closeModal}>
             <div className="modalContent">
                 <div className="modalTitleContainer">
                     <span className="modalClose" onClick={closeModal}>&times;</span>
-                    <div>Edit User</div>
+                    <div>{type} User</div>
                 </div>
-                <form className="modalContentContainer" onSubmit={clickSubmit}>
-                    <label className="modalLabel" htmlFor="username">Password</label>
-                    <input
-                        type={ isChecked ? "text" : "password"}
-                        name="password"
-                        className="modalInput"
-                        value={updateUser.password}
-                        placeholder="password"
-                        onChange={handleChangeFor('password')}
-                    />
-                    <label className="modalLabel" htmlFor="username">New Password</label>
-                    <input
-                        type={ isChecked ? "text" : "password"}
-                        name="newPassword"
-                        className="modalInput"
-                        value={updateUser.newPassword}
-                        placeholder="New Password"
-                        onChange={handleChangeFor('newPassword')}
-                    />
-                    <label htmlFor="checkbox">
-                        <input type="checkbox" name="checkbox" value={isChecked} onChange={e => setIsChecked(e.target.checked)} />
-                        <span> Show Password</span>
-                    </label>
-                    {
-                        message ?
-                        <div className={"messageContainer" + (!isUpdateSuccess ? " error" : " normal")}>
-                            <span>{message}</span>
+                {
+                    type === 'Edit' ?
+                    <form className="modalContentContainer" onSubmit={clickUpdateSubmit}>
+                        <label className="modalLabel" htmlFor="username">Password</label>
+                        <input
+                            type={ isChecked ? "text" : "password"}
+                            name="password"
+                            className="modalInput"
+                            value={updateUser.password}
+                            placeholder="password"
+                            onChange={handleChangeFor('password')}
+                        />
+                        <label className="modalLabel" htmlFor="username">New Password</label>
+                        <input
+                            type={ isChecked ? "text" : "password"}
+                            name="newPassword"
+                            className="modalInput"
+                            value={updateUser.newPassword}
+                            placeholder="New Password"
+                            onChange={handleChangeFor('newPassword')}
+                        />
+                        <label htmlFor="checkbox">
+                            <input type="checkbox" name="checkbox" value={isChecked} onChange={e => setIsChecked(e.target.checked)} />
+                            <span> Show Password</span>
+                        </label>
+                        {
+                            message ?
+                            <div className={"messageContainer" + (!isUpdateSuccess ? " error" : " normal")}>
+                                <span>{message}</span>
+                            </div>
+                            : null
+                        }
+                        <div className="modalContentButtonContainer">
+                            <input className="updateButton" type="submit" value="UPDATE" />
                         </div>
-                        : null
-                    }
-                    <div className="modalContentButtonContainer">
-                        <input className="updateButton" type="submit" value="UPDATE" />
-                    </div>
-                </form>
+                    </form>
+                    :
+                    <form className="modalContentContainer" onSubmit={clickDeleteSubmit}>
+                        <div>Are you sure?</div>
+                        <div>Your account will be deleted.</div>
+                        <div className="modalContentButtonContainer">
+                            <input className="deleteButton" type="submit" value="DELETE" />
+                        </div>
+                    </form>
+                }
             </div>
         </div>
     );

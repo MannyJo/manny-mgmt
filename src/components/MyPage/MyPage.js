@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import MyPageForm from './MyPageForm';
 
@@ -14,7 +13,7 @@ const MyPage = props => {
     const [ searchedUser, setSearchedUser ] = useState({});
     const [ role, setRole ] = useState({});
     const [ hidden, setHidden ] = useState(true);
-    let history = useHistory();
+    const [ type, setType ] = useState('Edit');
 
     useEffect(() => {
         if(userInfo.id > 0) {
@@ -32,19 +31,13 @@ const MyPage = props => {
     }, [ userInfo, config ]);
 
     const deleteUser = () => {
-        axios.delete(`/api/user/delete/${userInfo.id}`, config)
-        .then(results => {
-            console.log(results.data);
-            logout();
-            history.push('/home');
-        }).catch(err => {
-            console.error('Error with deleting user :', err.response.data.message);
-        });
+        setHidden(!hidden);
+        setType('Delete');
     }
 
-    const logout = () => {
-        props.dispatch({ type: 'UNSET_USERINFO' });
-        props.dispatch({ type: 'LOGOUT' });
+    const editUer = () => {
+        setHidden(!hidden);
+        setType('Edit');
     }
 
     return (
@@ -60,9 +53,10 @@ const MyPage = props => {
             </div>
             <div className="myPageBtnContainer">
                 <button className="btnDelete" onClick={deleteUser}>Delete Account</button>
-                <button className="btnUpdate" onClick={() => setHidden(!hidden)}>Change Password</button>
+                <button className="btnUpdate" onClick={editUer}>Change Password</button>
             </div>
             <MyPageForm
+                type={type}
                 hidden={hidden}
                 setHidden={setHidden}
             />
