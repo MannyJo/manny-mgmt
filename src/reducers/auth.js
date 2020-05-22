@@ -1,6 +1,7 @@
 const config = { 
     headers: {
-        Authorization: '' 
+        Authorization: '',
+        baseURL: process.env.NODE_ENV === 'production' ? 'https://manny-mgmt-server.herokuapp.com' : 'http://localhost:8080'
     }
 };
 
@@ -9,6 +10,7 @@ const axiosConfig = (state = config, action) => {
         case 'LOGIN':
             return {
                 headers: {
+                    ...config.headers,
                     Authorization: action.payload
                 }
             };
