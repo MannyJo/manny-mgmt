@@ -15,7 +15,6 @@ const Login = props => {
     const [ isLogin, setIsLogin ] = useState(true);
     const [ user, setUser ] = useState(DEFAULT_INFO);
     const [ isChecked, setIsChecked ] = useState(false);
-
     let history = useHistory();
 
     useEffect(() => {
