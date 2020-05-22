@@ -9,7 +9,9 @@ const Login = props => {
         username: '', 
         password: ''
     };
-
+    const {
+        config
+    } = props;
     const [ isLogin, setIsLogin ] = useState(true);
     const [ user, setUser ] = useState(DEFAULT_INFO);
     const [ isChecked, setIsChecked ] = useState(false);
@@ -38,7 +40,7 @@ const Login = props => {
     }
 
     const submitRegister = () => {
-        axios.post('/api/user/create', user)
+        axios.post('/api/user/create', user, config)
         .then(results => {
             console.log(results);
             setIsLogin(true);
@@ -49,7 +51,7 @@ const Login = props => {
 
     const submitLogin = () => {
         // CORS problem is solved by using JSON.stringify
-        axios.post('/login', JSON.stringify(user))
+        axios.post('/login', JSON.stringify(user), config)
         .then(results => {
             const userInfo = {
                 id: results.data.id,
