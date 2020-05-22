@@ -23,11 +23,6 @@ const Login = props => {
         }
     });
 
-    useEffect(() => {
-        console.log('clicked :', isLogin);
-
-    }, [ isLogin ])
-
     const clickSubmit = e => {
         e.preventDefault();
         
