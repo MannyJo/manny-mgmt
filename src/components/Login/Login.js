@@ -6,8 +6,8 @@ import axios from 'axios';
 const Login = props => {
 
     const DEFAULT_INFO = {
-        username: 'jomansang@gmail.com', 
-        password: 'password123'
+        username: '', 
+        password: ''
     };
 
     const [ isLogin, setIsLogin ] = useState(true);
