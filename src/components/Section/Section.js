@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios';
 import { connect } from 'react-redux';
 import Subdirectory from '@material-ui/icons/SubdirectoryArrowRight';
 

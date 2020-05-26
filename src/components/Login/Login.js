@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios';
 
 const Login = props => {
 
@@ -9,18 +9,17 @@ const Login = props => {
         username: '', 
         password: ''
     };
-    const {
-        config
-    } = props;
     const [ isLogin, setIsLogin ] = useState(true);
     const [ user, setUser ] = useState(DEFAULT_INFO);
     const [ isChecked, setIsChecked ] = useState(false);
     let history = useHistory();
 
     useEffect(() => {
-        console.log('config :', config);
         if(props.config.headers.Authorization) {
+            document.title = 'Login';
             history.push('/home');
+        } else {
+            document.title = 'Register';
         }
     });
 
@@ -35,7 +34,7 @@ const Login = props => {
     }
 
     const submitRegister = () => {
-        axios.post('/api/user/create', user, config)
+        axios.post('/api/user/create', user)
         .then(results => {
             console.log(results);
             setIsLogin(true);
@@ -45,8 +44,7 @@ const Login = props => {
     }
 
     const submitLogin = () => {
-        // CORS problem is solved by using JSON.stringify
-        axios.post('/login', JSON.stringify(user), config)
+        axios.post('/login', JSON.stringify(user))
         .then(results => {
             const userInfo = {
                 id: results.data.id,

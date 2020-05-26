@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Add from '@material-ui/icons/Add';
-import axios from 'axios';
+import axios from '../../axios';
 import { connect } from 'react-redux';
 
 import StorageItem from './StorageItem';

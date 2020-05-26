@@ -1,7 +1,6 @@
 const config = { 
     headers: {
         Authorization: '',
-        baseURL: process.env.NODE_ENV === 'production' ? 'https://manny-mgmt-server.herokuapp.com' : 'http://localhost:8080'
     }
 };
 
