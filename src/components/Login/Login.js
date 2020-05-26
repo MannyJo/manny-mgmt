@@ -9,6 +9,9 @@ const Login = props => {
         username: '', 
         password: ''
     };
+    const {
+        config
+    } = props;
     const [ isLogin, setIsLogin ] = useState(true);
     const [ user, setUser ] = useState(DEFAULT_INFO);
     const [ isChecked, setIsChecked ] = useState(false);
@@ -34,7 +37,7 @@ const Login = props => {
     }
 
     const submitRegister = () => {
-        axios.post('/api/user/create', user)
+        axios.post('/api/user/create', user, config)
         .then(results => {
             console.log(results);
             setIsLogin(true);
