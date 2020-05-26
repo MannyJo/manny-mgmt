@@ -18,6 +18,7 @@ const Login = props => {
     let history = useHistory();
 
     useEffect(() => {
+        console.log('config :', config);
         if(props.config.headers.Authorization) {
             history.push('/home');
         }
