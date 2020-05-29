@@ -3,15 +3,15 @@
     top: 0;
     margin: 0;
     padding: 0;
-    line-height: 30px;
+    line-height: $lineHeight;
     z-index: 2;
 
     .navButton {
         position: fixed;
         right: 0;
 
-        padding-right: 10px;
-        padding-top: 10px;
+        padding-right: $basic*2;
+        padding-top: $basic*2;
     }
 }
 
@@ -41,7 +41,7 @@
         width: 100%;
 
         .navTitle {
-            font-size: 40px;
+            font-size: size(fontMedium);
             text-align: center;
             font-weight: bold;
             margin-bottom: 30px;
@@ -52,11 +52,11 @@
         }
     
         a {
-            color: darken(white, 30%);
-            font-size: 30px;
+            color: darken(color(lightFont), 30%);
+            font-size: size(fontSmall);
 
             &:hover {
-                color: white;
+                color: color(lightFont);
             }
         }
     }

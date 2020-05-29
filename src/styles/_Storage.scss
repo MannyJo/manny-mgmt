@@ -1,17 +1,18 @@
 .storageContainer {
-    padding-top: 30px;
+    padding-top: $paddingTop;
 }
 
 .subContainer {
-    margin-left: 30px;
+    margin-left: $basic*6;
 
     .subItemContainer {
-        background-color: lighten($color: #525252, $amount: 10%);
+        background-color: lighten($color: color(primary), $amount: 10%);
     
-        border-radius: 5px;
-        padding: 5px;
-        margin-bottom: 5px;
+        padding: $basic;
+        margin-bottom: $basic;
 
-        line-height: 30px;
+        @extend %borderSet;
+
+        line-height: $lineHeight;
     }
 }

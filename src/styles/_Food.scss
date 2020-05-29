@@ -1,24 +1,26 @@
 .foodContainer {
-    padding-top: 30px;
+    padding-top: $paddingTop;
 }
 
 .itemOuterContainer {
-    padding: 10px;
+    padding: $basic*2;
     margin: auto;
-    max-width: 500px;
+    
+    @extend %width;
 
     .itemInnerContainer {
-        background-color: lighten($color: #525252, $amount: 10%);
-        border-radius: 5px;
+        background-color: lighten($color: color(primary), $amount: 10%);
+        
+        @extend %borderSet;
     
         .itemTitleContainer {
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            padding: 10px;
-            background-color: darken($color: #525252, $amount: 5%);
+            border-top-left-radius: $basic;
+            border-top-right-radius: $basic;
+            padding: $basic*2;
+            background-color: darken($color: color(primary), $amount: 5%);
 
             .itemName {
-                font-size: 20px;
+                font-size: size(fontBasic) + $basic;
                 text-align: center;
                 text-transform: uppercase;
             }
@@ -29,7 +31,7 @@
             display: grid;
             grid-template-columns: 50% 50%;
             text-align: center;
-            font-size: 15px;
+            font-size: size(fontBasic);
 
             .alignLeft {
                 text-align: left;
@@ -44,13 +46,13 @@
     
             .itemNote {
                 padding: 5px 20px 10px 20px;
-                font-size: 13px;
+                font-size: size(fontBasic);
                 text-align: center;
             }
         }
 
         .itemButtonContainer {
-            padding: 5px;
+            padding: $basic;
         }
     }
 }

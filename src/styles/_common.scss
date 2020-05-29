@@ -6,6 +6,10 @@ button, input {
     outline: none;
 }
 
+.background {
+    @extend %background;
+}
+
 .btnContainer {
     float: right;
     margin-top: -2px;
@@ -13,46 +17,46 @@ button, input {
     &.item {
         float: none;
         text-align: center;
-        margin: 10px;
+        margin: $basic*2;
         margin-top: 0;
     }
 
     .button {
-        border: none;
-        border-radius: 5px;
-        padding: 5px;
+        padding: $basic;
+
+        @extend %borderSet;
 
         &.edit {
-            background-color: rgba($color: #7ff351, $alpha: 1.0);
+            background-color: color(update);
         }
 
         &.delete {
-            background-color: rgba($color: #f35151, $alpha: 1.0);
+            background-color: color(delete);
         }
 
         &:hover {
-            box-shadow: 0px 0px 5px white;
-            color: white;
+            box-shadow: 0 0 $basic color(white);
+            color: color(lightFont);
         }
     }
 }
 
 .titleContainer {
     margin: auto;
-    max-width: 500px;
+    max-width: $maxWidth;
 
     .newBtnContainer {
         float: right;
     
         .newBtn {
-            border: none;
-            border-radius: 5px;
-            padding: 5px;
+            padding: $basic;
     
             margin-top: 2px;
-            margin-right: 15px;
+            margin-right: $basic*3;
     
-            background-color: #ffffff;
+            background-color: color(white);
+
+            @extend %borderSet;
         }
     }
 
@@ -63,19 +67,19 @@ button, input {
 
 .outerContainer {
 
-    padding: 5px;
+    padding: $basic;
     margin: auto;
-    max-width: 500px;
+    max-width: $maxWidth;
     
     .innerContainer {
-        border-radius: 5px;
+        @extend %borderSet;
     
-        padding: 5px;
-        margin-bottom: 5px;
+        padding: $basic;
+        margin-bottom: $basic;
     
-        line-height: 30px;
+        line-height: $lineHeight;
     
-        background-color: rgba($color: #525252, $alpha: 1.0);
+        background-color: color(primary);
     }
 }
     
@@ -96,14 +100,15 @@ button, input {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba($color: #000000, $alpha: 0.4);
+    background-color: rgba($color: black, $alpha: 0.4);
 
     .modalContent {
-        background-color: grey;
+        background-color: color(primary);
         margin: 15% auto;
-        width: 80%;
-        border: 1px solid #ffffff;
-        border-radius: 5px;
+        
+        @extend %width;
+        @extend %borderSet;
+        border: 1px solid color(white);
 
         .modalTitleContainer {
             font-size: 20px;
@@ -111,22 +116,22 @@ button, input {
             border-top-right-radius: 5px;
             padding: 15px;
             margin-bottom: 15px;
-            background-color: #ffffff;
-            color: #000000;
+            background-color: color(white);
+            color: color(darkFont);
 
             .modalClose {
                 margin-top: -10px;
-                font-size: 30px;
+                font-size: size(small);
                 float: right;
 
                 &:hover {
-                    color: grey;
+                    color: color(primary);
                 }
             }
         }
 
         .modalContentContainer {
-            padding: 15px;
+            padding: $basic*3;
 
             .modalLabel {
                 margin-left: 3px;
@@ -134,15 +139,15 @@ button, input {
 
             .modalInput {
                 width: 100%;
-                border: none;
-                border-radius: 5px;
-                padding: 5px;
-                margin: 5px 0;
+                padding: $basic;
+                margin: $basic 0;
                 box-sizing: border-box;
                 outline: none;
 
+                @extend %borderSet;
+
                 &.select {
-                    background-color: #ffffff;
+                    background-color: color(white);
                 }
             }
 
@@ -159,27 +164,27 @@ button, input {
                 text-align: right;
 
                 .addButton {
-                    background-color: #000000;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 5px;
+                    background-color: color(black);
+                    color: color(lightFont);
+                    padding: $basic;
+
+                    @extend %borderSet;
                 }
 
                 .updateButton {
-                    background-color: rgba($color: #7ff351, $alpha: 1.0);
-                    color: black;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 5px;
+                    background-color: color(update);
+                    color: color(darkFont);
+                    padding: $basic;
+
+                    @extend %borderSet;
                 }
 
                 .deleteButton {
-                    background-color: rgba($color: #f35151, $alpha: 1.0);
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    padding: 5px;
+                    background-color: color(delete);
+                    color: color(lightFont);
+                    padding: $basic;
+
+                    @extend %borderSet;
                 }
             }
         }
@@ -188,17 +193,17 @@ button, input {
 
 .messageContainer {
 
-    margin-top: 10px;
-    padding: 5px;
-    border-radius: 5px;
+    margin-top: $basic*2;
+    padding: $basic;
+    @extend %borderSet;
 
     &.error {
-        background-color: rgba($color: red, $alpha: 0.2);
-        border: 1px solid red;
+        background-color: rgba($color: color(error), $alpha: 0.2);
+        border: 1px solid color(error);
     }
 
     &.normal {
-        background-color: rgba($color: blue, $alpha: 0.2);
-        border: 1px solid blue;
+        background-color: rgba($color: color(normal), $alpha: 0.2);
+        border: 1px solid color(normal);
     }
 }

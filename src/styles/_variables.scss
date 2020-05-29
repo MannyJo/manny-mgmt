@@ -1,0 +1,53 @@
+$maxWidth: 500px;
+$basicWidth: 80%;
+$paddingTop: 30px;
+$basic: 5px;
+$lineHeight: 30px;
+
+$color: (
+    primary: #525252,
+    secondary: #252525,
+    white: #ffffff,
+    black: #000000,
+    lightFont: #ffffff,
+    darkFont: #000000,
+    update: #7ff351,
+    delete: #f35151,
+    error: red,
+    normal: blue,
+);
+
+$size: (
+    fontBig: 50px,
+    fontMedium: 40px,
+    fontSmall: 30px,
+    fontBasic: 15px,
+);
+
+@function color($colorName) {
+    @return map-get($map: $color, $key: $colorName);
+}
+
+@function size($sizeName) {
+    @return map-get($map: $size, $key: $sizeName);
+}
+
+%borderSet {
+    border: none;
+    border-radius: 5px;
+}
+
+%width {
+    max-width: $maxWidth;
+    width: $basicWidth;
+}
+
+%background {
+    width: 100vw;
+    height: 100vh;
+
+    background: linear-gradient(rgba(44, 44, 44, 1), rgba(255, 0, 0, 0.1)), url('../img/shelf.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left right;
+}

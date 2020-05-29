@@ -1,20 +1,22 @@
 .loginContainer {
-    margin: auto;
-    padding-top: 30px;
     text-align: center;
-    width: 80%;
-    max-width: 500px;
+
+    margin: auto;
+    padding-top: $paddingTop;
+    
+    @extend %width;
 
     .loginFormContainer {
-        background-color: rgba(#252525, 0.7);
-        padding: 10px;
-        border-radius: 5px;
+        background-color: rgba(color(secondary), 0.7);
+        padding: $basic * 2;
+            
+        @extend %borderSet;
 
         label {
-            font-size: 20px;
+            font-size: size(fontBasic) + $basic;
 
             span {
-                font-size: 15px;
+                font-size: size(fontBasic);
             }
         }
 
@@ -23,9 +25,9 @@
 
             box-sizing: border-box;
             margin: 10px 0;
-            padding: 5px;
-            border: 0;
-            border-radius: 5px;
+            padding: $basic;
+
+            @extend %borderSet;
         }
 
         .loginBtnContainer {
@@ -35,14 +37,14 @@
             .loginBtn {
                 width: 100%;
 
-                padding: 5px;
-                border-radius: 5px;
-                border: 0;
+                padding: $basic;
+            
+                @extend %borderSet;
 
-                background-color: lighten($color: #525252, $amount: 20%);
+                background-color: lighten($color: color(primary), $amount: 20%);
 
-                color: white;
-                font-size: 15px;
+                color: color(lightFont);
+                font-size: size(fontBasic);
             }
         }
 
@@ -50,14 +52,15 @@
 
     .loginRegisterChange {
         text-align: right;
-        padding-top: 5px;
-        padding-right: 10px;
+        padding-top: $basic;
+        padding-right: $basic*2;
 
         button {
             background: none;
             color: skyblue;
-            border: none;
-            font-size: 15px;
+            font-size: size(fontBasic);
+
+            @extend %borderSet;
         }
     }
 }
