@@ -32,6 +32,13 @@ $size: (
     @return map-get($map: $size, $key: $sizeName);
 }
 
+@mixin buttonSet($bgColor, $alpha, $fontColor) {
+    background-color: rgba(color($bgColor), $alpha);
+    color: color($fontColor);
+    padding: $basic;
+    font-size: size(fontBasic);
+}
+
 %borderSet {
     border: none;
     border-radius: 5px;

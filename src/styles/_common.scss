@@ -164,26 +164,17 @@ button, input {
                 text-align: right;
 
                 .addButton {
-                    background-color: color(black);
-                    color: color(lightFont);
-                    padding: $basic;
-
+                    @include buttonSet(black, 1.0, lightFont);
                     @extend %borderSet;
                 }
 
                 .updateButton {
-                    background-color: color(update);
-                    color: color(darkFont);
-                    padding: $basic;
-
+                    @include buttonSet(update, 1.0, darkFont);
                     @extend %borderSet;
                 }
 
                 .deleteButton {
-                    background-color: color(delete);
-                    color: color(lightFont);
-                    padding: $basic;
-
+                    @include buttonSet(delete, 1.0, lightFont);
                     @extend %borderSet;
                 }
             }

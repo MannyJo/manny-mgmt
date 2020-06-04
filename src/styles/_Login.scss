@@ -36,15 +36,9 @@
 
             .loginBtn {
                 width: 100%;
-
-                padding: $basic;
-            
+                
+                @include buttonSet(primary, 1.0, lightFont);
                 @extend %borderSet;
-
-                background-color: lighten($color: color(primary), $amount: 20%);
-
-                color: color(lightFont);
-                font-size: size(fontBasic);
             }
         }
 
